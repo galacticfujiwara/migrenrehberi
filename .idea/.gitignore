@@ -1,0 +1,7 @@
+# Default ignored files
+/workspace.xml
+../node_modules/
+misc.xml
+modules.xml
+spordkit.iml
+vcs.xml

@@ -1,0 +1,30 @@
+const chai = require('chai');
+const chaiHttp =require('chai-http');
+const should=chai.should();
+const  server = require('../../app');
+
+chai.use(chaiHttp);
+
+describe('Node server',()=>{
+   it('(GET /) anasayfayı döndürür',(done)=>{
+       chai.request(server)
+           .get('/getAllUsers')
+           .end((err,res)=>{
+               res.should.have.status(200);
+               done();
+           })
+   });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
