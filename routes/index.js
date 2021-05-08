@@ -13,6 +13,15 @@ const transporter = nodemailer.createTransport({
     pass: 'Kerem199841',
   },
 });
+router.get("/testt", (req, res, next) => {
+  res.json({
+    data: "deneme veri",
+    status: 200,
+    message: "Set Approve  pass",
+    error: "",
+    message_tr: "Approve tamam",
+  });
+});
 
 router.get('/verifyToken/:token', (req, res) => {
   const token =
