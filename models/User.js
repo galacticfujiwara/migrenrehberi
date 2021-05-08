@@ -78,6 +78,8 @@ const UserSchema = new Schema({
       ilaclar: String,
       agriYerleri: String,
       semptomlar: String,
+      created_date:{ type: String, default: dateFormat(now, "dd/mm/yyyy")}
+
     },
   ],
 
