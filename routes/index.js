@@ -6,13 +6,7 @@ const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 //TÜm kayıtları listeleme
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'krmytr44@gmail.com',
-    pass: 'Kerem199841',
-  },
-});
+
 router.get("/testt", (req, res, next) => {
   res.json({
     data: "deneme veri",
@@ -327,110 +321,5 @@ router.post('/userRegister', (req, res, next) => {
   });
 });
 
-//Şifre değiştirme
-router.post('/sendResetPassword', (req, res, next) => {
-  const {Email} = req.body;
-  console.log(Email);
-  User.findOne(
-    {
-      Email,
-    },
-    (err, user) => {
-      if (err) throw err;
-
-      if (!user) {
-        res.json({
-          data: '',
-          status: 204,
-          message: 'User not found',
-          error: err,
-          message_tr: 'Kullanıcı bulunamadı.',
-        });
-      } else {
-        const Username = user.Username.toString();
-        const payload = {
-          Username,
-        };
-        const token = jwt.sign(payload, req.app.get('api_secret_key'), {
-          expiresIn: '2d',
-        });
-        const url = 'http://localhost:3000/resetpassword/' + token;
-        console.log(url);
-        const mailOptions = {
-          from: 'krmytr44@gmail.com',
-          to: Email,
-          subject: 'Spordkit Şifre Değiştirme ',
-          text: 'Şifrenizi değiştirmek için tıklayınız ' + url,
-        };
-        transporter.sendMail(mailOptions, (error, info) => {
-          if (error) {
-            console.log('Mail fail');
-            res.json({
-              data: '',
-              status: 204,
-              message: 'Email not found',
-              error: error,
-              message_tr: 'Email bulunamadı.',
-            });
-          } else {
-            console.log('Mail pass');
-            res.json({
-              data: '',
-              status: 204,
-              message: 'Reset password email resent. ' + info.response,
-              error: '',
-              message_tr: 'Şifre sıfırlama maili gönderildi.',
-            });
-          }
-        });
-      }
-    },
-  );
-});
-router.put('/resetpassword/:token', (req, res, next) => {
-  //const {Name,Surname,Username,Password,Email,Weight,Height,Sex}=req.body;
-  const {Username} = jwt.verify(
-    req.params.token,
-    req.app.get('api_secret_key'),
-  );
-  const {Password} = req.body;
-  console.log(Username);
-  console.log(Password);
-  bcrypt.hash(Password, 10).then(hash => {
-    req.body.Password = hash;
-    const promise = User.useFindAndModify(
-      {Username: Username},
-      {Password: hash},
-    );
-
-    promise
-      .then(user => {
-        if (!user)
-          next({
-            data: '',
-            status: 204,
-            message: 'User not found.',
-            error: '',
-            message_tr: 'Kullanıcı bulunamadı',
-          });
-        res.json({
-          data: user,
-          status: 200,
-          message: 'User find',
-          error: '',
-          message_tr: 'Şifreniz değiştirildi',
-        });
-      })
-      .catch(err => {
-        res.json({
-          data: '',
-          status: 204,
-          message: 'Reset Password failed ',
-          error: err,
-          message_tr: '',
-        });
-      });
-  });
-});
 
 module.exports = router;
