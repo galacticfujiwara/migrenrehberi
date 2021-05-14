@@ -37,9 +37,8 @@ router.get('/getUserDetails/:user_id', (req, res, next) => {
 });
 
 router.post('/setsf12/', (req, res, next) => {
- 
   const {Sf12Puan, token} = req.body;
-  console.log('sf12 body',req.body)
+  console.log('sf12 body', req.body);
   var userID = '';
   jwt.verify(token, req.app.get('api_secret_key'), (err, decoded) => {
     if (err) {
@@ -57,7 +56,7 @@ router.post('/setsf12/', (req, res, next) => {
     userID,
     //buda post ile gelen data
     {new: true},
-  ); 
+  );
   promise
     .then(user => {
       if (!user)
@@ -256,9 +255,7 @@ router.post('/setanksiyeteDepresyon', (req, res, next) => {
       });
     });
 });
-  
 
- 
 router.post('/setUk', (req, res, next) => {
   const {UKisaFormPuan, token} = req.body;
   var userID = '';
@@ -316,7 +313,7 @@ router.post('/setUk', (req, res, next) => {
 });
 
 router.post('/addBasagrisi', (req, res, next) => {
-  const { token} = req.body;
+  const {token} = req.body;
   var userID = '';
   jwt.verify(token, req.app.get('api_secret_key'), (err, decoded) => {
     if (err) {
@@ -337,6 +334,8 @@ router.post('/addBasagrisi', (req, res, next) => {
     ilaclar,
     agriYerleri,
     semptomlar,
+    Baslangic,
+    Bitis,
   } = req.body;
   const promise = User.findByIdAndUpdate(
     userID,
@@ -361,6 +360,8 @@ router.post('/addBasagrisi', (req, res, next) => {
         ilaclar,
         agriYerleri,
         semptomlar,
+        Baslangic,
+        Bitis,
       };
       console.log('MigrenGunlugu', MigrenGunlugu);
       user.MigrenGunlugu.push(MigrenGunlugu);
