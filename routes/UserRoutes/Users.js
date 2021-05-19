@@ -390,4 +390,71 @@ router.post('/addBasagrisi', (req, res, next) => {
     });
 });
 
+router.post('/addEgzersiz', (req, res, next) => {
+  const {token} = req.body;
+  var userID = '';
+  jwt.verify(token, req.app.get('api_secret_key'), (err, decoded) => {
+    if (err) {
+      res.json({
+        status: 401,
+        message: 'Token Geçersiz',
+      });
+    } else {
+      var bilgiler = decoded;
+      userID = decoded.id;
+      console.log('bilgiler', bilgiler);
+    }
+  });
+
+  const {
+    EgzersizYaptim,
+   
+  } = req.body;
+  const promise = User.findByIdAndUpdate(
+    userID,
+    //buda post ile gelen data
+    {new: true},
+  );
+
+  promise
+    .then(user => {
+      if (!user)
+        res.json({
+          data: '',
+          status: 204,
+          message: 'Update UserRoutes not found',
+          error: '',
+          message_tr: 'Güncellenecek kullanıcı bulunamadı.',
+        });
+
+      let EgzersizGunlugu = {
+        EgzersizYaptim
+      };
+      console.log('EgzersizGunlugu', EgzersizGunlugu);
+      user.EgzersizGunlugu.push(EgzersizGunlugu);
+      console.log('User', user);
+
+      user.save().then(() => {
+        console.log('günlük kayıt');
+      });
+
+      res.json({
+        data: user,
+        status: 200,
+        message: 'Update UserRoutes pass',
+        error: '',
+        message_tr: 'Kullanıcı Güncelleme',
+      });
+    })
+    .catch(err => {
+      res.json({
+        data: '',
+        status: 204,
+        message: 'Update UserRoutes failed',
+        error: err,
+        message_tr: 'Kullanıcı Güncelleme Başarısız',
+      });
+    });
+});
+
 module.exports = router;

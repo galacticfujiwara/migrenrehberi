@@ -30,7 +30,7 @@ const UserSchema = new Schema({
     maxlength: 75,
   },
   NeKadardir: {
-    type: String, 
+    type: String,
     minlength: 1,
     maxlength: 75,
   },
@@ -80,8 +80,13 @@ const UserSchema = new Schema({
       semptomlar: String,
       Baslangic: String,
       Bitis: String,
-      created_date:{ type: String, default: dateFormat(now, "dd/mm/yyyy")}
-
+      created_date: {type: String, default: dateFormat(now, 'dd/mm/yyyy')},
+    },
+  ],
+  EgzersizGunlugu: [
+    {
+      EgzersizYaptim: String,
+      created_date: {type: String, default: dateFormat(now, 'dd/mm/yyyy')},
     },
   ],
 
