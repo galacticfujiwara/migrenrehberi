@@ -102,6 +102,37 @@ router.post('/userInfo', (req, res, next) => {
       });
     });
 });
+router.get('/geTAU', (req, res, next) => {
+  const {token} = req.body;
+  var userID = '';
+  console.log('user ınfo req.body',req.body)
+
+  const promise = User.find(
+   {},
+   
+  );
+  promise
+    .then(user => {
+  
+     
+      res.json({
+        data: user,
+        status: 200,
+        message: 'Set Approve  pass',
+        error: '',
+        message_tr: 'Approve tamam',
+      });
+    })
+    .catch(err => {
+      res.json({
+        data: '',
+        status: 204,
+        message: 'Approve  failed',
+        error: err,
+        message_tr: 'Kullanıcı Approve Başarısız',
+      });
+    });
+});
 
 //Token oluşturma
 router.post('/authenticateUser', (req, res) => {

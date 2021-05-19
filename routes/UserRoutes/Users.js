@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer');
 
 router.get('/getUserDetails/:user_id', (req, res, next) => {
   const promise = User.findById(req.params.user_id);
+
   promise
     .then(user => {
       if (!user)
