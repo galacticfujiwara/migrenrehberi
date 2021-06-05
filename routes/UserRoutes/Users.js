@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const dateFormat = require('dateformat');
 
 router.get('/getUserDetails/:user_id', (req, res, next) => {
   const promise = User.findById(req.params.user_id);
@@ -68,7 +69,10 @@ router.post('/setsf12/', (req, res, next) => {
           error: '',
           message_tr: 'Onaylacak kullanıcı bulunamadı.',
         });
+      const now = new Date();
+
       user.Sf12Puan = Sf12Puan;
+      user.Sf12PuanDate = dateFormat(now, 'dd/mm/yyyy');
       console.log(user.Sf12Puan);
       user.save().then(() => {
         console.log('Sf12Puan güncellendi ' + Sf12Puan);
@@ -123,7 +127,10 @@ router.post('/setmidas', (req, res, next) => {
           error: '',
           message_tr: 'MidasPuan kullanıcı bulunamadı.',
         });
+        const now = new Date();
+
       user.MidasPuan = MidasPuan;
+      user.MidasPuanDate = dateFormat(now, 'dd/mm/yyyy');
       console.log(user.MidasPuan);
       user.save().then(() => {
         console.log('MidasPuan güncellendi ' + MidasPuan);
@@ -177,7 +184,10 @@ router.post('/setuykusuzluk', (req, res, next) => {
           error: '',
           message_tr: 'Onaylacak kullanıcı bulunamadı.',
         });
+        const now = new Date();
+
       user.UykusuzlukPuan = UykusuzlukPuan;
+      user.UykusuzlukPuanDate = dateFormat(now, 'dd/mm/yyyy');
       console.log(user.UykusuzlukPuan);
       user.save().then(() => {
         console.log('UykusuzlukPuan güncellendi ' + UykusuzlukPuan);
@@ -231,8 +241,13 @@ router.post('/setanksiyeteDepresyon', (req, res, next) => {
           error: '',
           message_tr: 'Onaylacak kullanıcı bulunamadı.',
         });
+        const now = new Date();
+
       user.AnksiyetePuan = AnksiyetePuan;
+      user.AnksiyetePuanDate = dateFormat(now, 'dd/mm/yyyy');
+      
       user.DepresyonPuan = DepresyonPuan;
+      user.DepresyonPuanDate = dateFormat(now, 'dd/mm/yyyy');
 
       user.save().then(() => {
         console.log('Anksiyete DepresyonPuan güncellendi ' + AnksiyetePuan);
@@ -288,7 +303,10 @@ router.post('/setUk', (req, res, next) => {
           error: '',
           message_tr: 'UKisaFormPuan kullanıcı bulunamadı.',
         });
+        const now = new Date();
+
       user.UKisaFormPuan = UKisaFormPuan;
+      user.UKisaFormPuanDate = dateFormat(now, 'dd/mm/yyyy');
       console.log(user.UKisaFormPuan);
       user.save().then(() => {
         console.log('UKisaFormPuan güncellendi ' + MidasPuan);

@@ -56,19 +56,37 @@ const UserSchema = new Schema({
   Sf12Puan: {
     type: String,
   },
+  Sf12PuanDate: {
+    type: String,
+  },
   MidasPuan: {
+    type: String,
+  },
+  MidasPuanDate: {
     type: String,
   },
   UykusuzlukPuan: {
     type: String,
   },
+  UykusuzlukPuanDate: {
+    type: String,
+  },
   AnksiyetePuan: {
+    type: String,
+  },
+  AnksiyetePuanDate: {
     type: String,
   },
   DepresyonPuan: {
     type: String,
   },
+  DepresyonPuanDate: {
+    type: String,
+  },
   UKisaFormPuan: {
+    type: String,
+  },
+  UKisaFormPuanDate: {
     type: String,
   },
   MigrenGunlugu: [
