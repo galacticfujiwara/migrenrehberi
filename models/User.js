@@ -7,17 +7,17 @@ const now = new Date();
 const UserSchema = new Schema({
   KullaniciAdi: {
     type: String,
-    minlength: 2,
+     
     maxlength: 50,
   },
   Sifre: {
     type: String,
-    minlength: 3,
+   
     maxlength: 75,
   },
   Email: {
     type: String,
-    minlength: 1,
+
     maxlength: 75,
     unique: true,
   },
@@ -26,67 +26,48 @@ const UserSchema = new Schema({
   Yas: Number,
   Aile: {
     type: String,
-    minlength: 1,
+
     maxlength: 75,
   },
   NeKadardir: {
     type: String,
-    minlength: 1,
+
     maxlength: 75,
   },
   Alkol: {
     type: String,
-    minlength: 1,
+
     maxlength: 75,
   },
   Sigara: {
     type: String,
-    minlength: 1,
+
     maxlength: 75,
   },
   Meslek: {
     type: String,
-    minlength: 1,
+
     maxlength: 75,
   },
   MedeniDurum: {
     type: String,
-    minlength: 1,
   },
   Sf12Puan: {
-    type: String,
-  },
-  Sf12PuanDate: {
     type: String,
   },
   MidasPuan: {
     type: String,
   },
-  MidasPuanDate: {
-    type: String,
-  },
   UykusuzlukPuan: {
-    type: String,
-  },
-  UykusuzlukPuanDate: {
     type: String,
   },
   AnksiyetePuan: {
     type: String,
   },
-  AnksiyetePuanDate: {
-    type: String,
-  },
   DepresyonPuan: {
     type: String,
   },
-  DepresyonPuanDate: {
-    type: String,
-  },
   UKisaFormPuan: {
-    type: String,
-  },
-  UKisaFormPuanDate: {
     type: String,
   },
   MigrenGunlugu: [
@@ -96,14 +77,6 @@ const UserSchema = new Schema({
       ilaclar: String,
       agriYerleri: String,
       semptomlar: String,
-      Baslangic: String,
-      Bitis: String,
-      created_date: {type: String, default: dateFormat(now, 'dd/mm/yyyy')},
-    },
-  ],
-  EgzersizGunlugu: [
-    {
-      EgzersizYaptim: String,
       created_date: {type: String, default: dateFormat(now, 'dd/mm/yyyy')},
     },
   ],
