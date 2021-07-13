@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const cors = require('cors');
+const path = require('path');
 
 
 const indexRouter = require('./routes/index');
@@ -16,6 +17,8 @@ const User = require('./models/User') ;
 
 const app = express();
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 //db connection
 const db= require('./helper/db.js')();
 //Config
